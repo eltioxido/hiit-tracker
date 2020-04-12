@@ -1,16 +1,24 @@
 import { ADD_ARTICLE, DATA_LOADED, API_ERRORED } from "../constants/action-types";
 
-import { TIME_STARTED, TIME_MAXOUT_SET, WORKOUT_SET} from "../constants/action-types";
+import {
+  TIME_STARTED,
+  TIME_MAXOUT_SET,
+  WORKOUT_CONFIGURATION_SET
+} from "../constants/action-types";
 
 const initialState = {
   articles: [],
   remoteArticles: [],
   error: '',
 
+  selectedWorkout: undefined,
+  selectedDate: undefined,
+  workoutConfigSet: false,
+  workOutStarted: false,
 
-  startTime: 0,
-  maxOutElapsed: 0,
-  workout: '',
+  workout:'',
+  startTime: undefined,
+  maxOutElapsed: undefined,
 };
 
 function rootReducer(state = initialState, action) {
@@ -42,9 +50,11 @@ function rootReducer(state = initialState, action) {
         maxOutElapsed: action.payload
     });
   }
-  if (action.type === WORKOUT_SET) {
+  if (action.type === WORKOUT_CONFIGURATION_SET) {
     return Object.assign({}, state, {
-        workout: action.payload
+      selectedWorkout: action.payload.selectedWorkout,
+      selectedDate: action.payload.selectedDate,
+      workoutConfigSet: true,
     });
   }
 

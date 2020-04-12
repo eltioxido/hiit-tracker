@@ -2,7 +2,6 @@ import React from "react";
 import TimerComponent from "./Timer";
 import MaxOutComponent from "./MaxOutComponent";
 import WorkoutPicker from "./WorkoutPicker";
-import {Calendar} from 'primereact/calendar';
 import 'react-calendar/dist/Calendar.css';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -30,9 +29,6 @@ function App() {
      <Grid container spacing={3}>
        <Grid item xs={12}>
          <Paper className={classes.paper}> <h4>Workout</h4> <WorkoutPicker /> </Paper>
-       </Grid>
-       <Grid item xs={12}>
-         <Paper className={classes.paper}> <h4> Pick a date </h4> <Calendar /> </Paper>
        </Grid>
        <Grid item xs={6}>
          <Paper className={classes.paper}> <TimerComponent /> </Paper>

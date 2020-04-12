@@ -49,7 +49,7 @@ export class TimerComponent extends Component {
                   <br />
                   <div>
                     <Button variant="outlined" color="primary" onClick={start}> Start </Button> <br /><br />
-                    <Button variant="outlined" color="primary" button onClick={stop}> Stop </Button> <br /><br />
+                    <Button variant="outlined" color="primary" onClick={stop}> Stop </Button> <br /><br />
                     <Button
                       size="large"
                       variant="contained"
