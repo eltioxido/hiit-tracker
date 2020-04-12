@@ -3,6 +3,9 @@ import { connect } from "react-redux";
 import Timer from 'react-compound-timer'
 import { setStartTime, setMaxOutElapsed } from "../actions/index";
 
+import Button from '@material-ui/core/Button';
+
+
 export class TimerComponent extends Component {
 
   constructor(props) {
@@ -24,11 +27,15 @@ export class TimerComponent extends Component {
     this.props.setMaxOutElapsed(elapsed);
   }
 
+
+
   render() {
+
+
     return (
       <Timer
         formatValue={value => `${value < 10 ? `0${value}` : value}`}
-        initialTime={0}
+        initialTime={123400}
         startImmediately={false}
         onStart={() => this.setStartTime()}
       >
@@ -41,12 +48,24 @@ export class TimerComponent extends Component {
                   </div>
                   <br />
                   <div>
-                      <button onClick={start}>Start</button>
-                      <button onClick={pause}>Pause</button>
-                      <button onClick={resume}>Resume</button>
-                      <button onClick={stop}>Stop</button>
-                      <button onClick={reset}>Reset</button>
-                      <button onClick={() => this.setMaxOutElapsed( getTime() )}>MaxOut!</button>
+                    <Button variant="outlined" color="primary" onClick={start}> Start </Button> <br /><br />
+                    <Button variant="outlined" color="primary" button onClick={stop}> Stop </Button> <br /><br />
+                    <Button
+                      size="large"
+                      variant="contained"
+                      color="primary"
+                      onClick={() => this.setMaxOutElapsed( getTime() )}>
+                        Max Out!
+                    </Button >
+
+                     <br /><br />
+
+
+                    <button onClick={pause}>Pause</button>
+                    <button onClick={resume}>Resume</button>
+                    <button onClick={reset}>Reset</button>
+
+
                   </div>
               </React.Fragment>
           )}

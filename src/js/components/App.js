@@ -5,25 +5,46 @@ import WorkoutPicker from "./WorkoutPicker";
 import {Calendar} from 'primereact/calendar';
 import 'react-calendar/dist/Calendar.css';
 
-const App = () => (
+import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  },
+}));
+
+function App() {
+
+  const classes = useStyles();
+
+  return (
   <>
-    <div>
-      <h2>WorkoutPicker</h2>
-      <WorkoutPicker />
-    </div>
-    <div>
-      <h2>Calendar</h2>
-      <Calendar />
-    </div>
-    <div>
-      <h2>Timer</h2>
-      <TimerComponent />
-    </div>
-    <div>
-      <h2>Maxout</h2>
-      <MaxOutComponent />
+  <div className={classes.root}>
+     <Grid container spacing={3}>
+       <Grid item xs={12}>
+         <Paper className={classes.paper}> <h4>Workout</h4> <WorkoutPicker /> </Paper>
+       </Grid>
+       <Grid item xs={12}>
+         <Paper className={classes.paper}> <h4> Pick a date </h4> <Calendar /> </Paper>
+       </Grid>
+       <Grid item xs={6}>
+         <Paper className={classes.paper}> <TimerComponent /> </Paper>
+       </Grid>
+       <Grid item xs={6}>
+         <Paper className={classes.paper}> <MaxOutComponent /> </Paper>
+       </Grid>
+
+     </Grid>
     </div>
   </>
 );
+}
 
 export default App;
