@@ -12,9 +12,43 @@ export class TimerComponent extends Component {
     super(props);
     this.state = {
       startTime: "",
-      maxOutElapsed: "",
+      maxOutElapsed: 0,
+
+      timerOn: false,
+      timerStart: 0,
+      timerTime: 0
     };
   }
+
+  startTimer = () => {
+
+    const lDate = Date.now()
+    this.setState({ startTime: lDate });
+    this.props.setStartTime(lDate);
+
+    this.setState({
+      timerOn: true,
+      timerTime: this.state.timerTime,
+      timerStart: Date.now() - this.state.timerTime
+    });
+    this.timer = setInterval(() => {
+      this.setState({
+        timerTime: Date.now() - this.state.timerStart
+      });
+    }, 10);
+  };
+
+  stopTimer = () => {
+    this.setState({ timerOn: false });
+    clearInterval(this.timer);
+  };
+  resetTimer = () => {
+    this.setState({
+      timerStart: 0,
+      timerTime: 0
+    });
+  };
+
 
   setStartTime() {
     const lDate = Date.now()
@@ -22,9 +56,9 @@ export class TimerComponent extends Component {
     this.props.setStartTime(lDate);
   }
 
-  setMaxOutElapsed(elapsed) {
-    this.setState({ maxOutElapsed: elapsed });
-    this.props.setMaxOutElapsed(elapsed);
+  setMaxOutElapsed() {
+    this.setState({ maxOutElapsed: this.timerTime });
+    this.props.setMaxOutElapsed(this.state.timerTime);
   }
 
 
@@ -32,43 +66,53 @@ export class TimerComponent extends Component {
   render() {
 
 
+          const { timerTime } = this.state;
+          let centiseconds = ("0" + (Math.floor(timerTime / 10) % 100)).slice(-2);
+          let seconds = ("0" + (Math.floor(timerTime / 1000) % 60)).slice(-2);
+          let minutes = ("0" + (Math.floor(timerTime / 60000) % 60)).slice(-2);
+          let hours = ("0" + Math.floor(timerTime / 3600000)).slice(-2);
+
+
     return (
-      <Timer
-        formatValue={value => `${value < 10 ? `0${value}` : value}`}
-        initialTime={0}
-        startImmediately={false}
-        onStart={() => this.setStartTime()}
-        timeToUpdate={100}
-      >
-        {({ start, resume, pause, stop, reset, timerState, getTime }) => (
-          <React.Fragment>
-            <div>
-              <h1> <Timer.Minutes/>:<Timer.Seconds/> </h1>
-            </div>
-            <br />
-            <div>
-              <Button variant="outlined" color="primary" onClick={start}> Start </Button> &nbsp;&nbsp;&nbsp;
-              <Button variant="outlined" color="primary" onClick={stop}> Stop </Button> &nbsp;&nbsp;&nbsp;
+
+
+        <React.Fragment>
+          <div>
+            <h1> {minutes}:{seconds} </h1>
+          </div>
+
+
+
+
+           <br />
+
+
+          <div>
+
+              <Button disabled={!(this.state.timerOn === false && this.state.timerTime === 0)} variant="outlined" color="primary" onClick={this.startTimer}> Start </Button>
               <br /><br />
               <Button
+                disabled={!(this.state.timerOn === true)}
                 size="large"
                 variant="contained"
                 color="primary"
-                onClick={() => this.setMaxOutElapsed( getTime() )}>
+                onClick={() => this.setMaxOutElapsed()}>
                   Max Out!
               </Button >
+              <br /><br />
+              <Button disabled={!(this.state.timerOn === true)} variant="outlined" color="primary" onClick={this.stopTimer}> Stop </Button>
+              <br /><br />
+              <Button disabled={!(this.state.timerOn === false && this.state.timerTime > 0)} variant="outlined" color="primary" size="small" onClick={this.startTimer}> Resume </Button> &nbsp;&nbsp;&nbsp;
+              <Button disabled={!(this.state.timerOn === false && this.state.timerTime > 0)} variant="outlined" color="primary" size="small" onClick={this.resetTimer}>  Reset  </Button> &nbsp;&nbsp;&nbsp;
 
-               <br /><br />
-
-              <Button variant="outlined" color="primary" size="small" onClick={pause}>  Pause  </Button> &nbsp;&nbsp;&nbsp;
-              <Button variant="outlined" color="primary" size="small" onClick={resume}> Resume </Button> &nbsp;&nbsp;&nbsp;
-              <Button variant="outlined" color="primary" size="small" onClick={reset}>  Reset  </Button> &nbsp;&nbsp;&nbsp;
+          </div>
+        </React.Fragment>
 
 
-            </div>
-          </React.Fragment>
-        )}
-      </Timer>
+
+
+
+
 
     );
   }
