@@ -28,6 +28,7 @@ export class ConnectedWorkoutPicker extends Component {
 			],
 			selectedDate: undefined,
 			selectedWorkout: undefined,
+			selectedWorkoutText: undefined,
 			max30Workout: '',
 			isOpen: false,
 		};
@@ -84,7 +85,7 @@ export class ConnectedWorkoutPicker extends Component {
 					<div className={classes.root}>
 						<Grid container spacing={3} direction="column" alignItems="center" justify="center">
 							<Grid item xs={12}>
-								<h5 class="d-inline-block"> Workout: </h5> &nbsp;&nbsp;&nbsp;
+								<h5 className="d-inline-block"> Workout: </h5> &nbsp;&nbsp;&nbsp;
 								<Dropdown
 									style={{ width: 220 }}
 									value={this.state.selectedWorkout}
@@ -96,7 +97,7 @@ export class ConnectedWorkoutPicker extends Component {
 								/>
 							</Grid>
 							<Grid item xs={12}>
-								<h5 class="d-inline-block"> Date: </h5	> &nbsp;&nbsp;&nbsp;
+								<h5 className="d-inline-block"> Date: </h5	> &nbsp;&nbsp;&nbsp;
 								<Calendar
 									value={new Date()}
 									showButtonBar={true}
@@ -111,7 +112,10 @@ export class ConnectedWorkoutPicker extends Component {
 				<Modal.Footer>
 					<Button variant="outlined" color="secondary" onClick={this.hideModal}>Cancel</Button>
 					&nbsp;&nbsp;&nbsp;
-					<Button variant="outlined" color="primary" onClick={this.setWorkout}> Save </Button>
+					<Button
+						variant="outlined" color="primary"
+						onClick={this.setWorkout}
+						disabled={typeof this.state.selectedDate === 'undefined' || typeof this.state.selectedWorkout === 'undefined'}> Save </Button>
 				</Modal.Footer>
 			</Modal>
 
@@ -129,10 +133,13 @@ export class ConnectedWorkoutPicker extends Component {
 	}
 
 	render() {
+		const test = this.state.max30ItemsMonth1.find(item => item.value === this.state.selectedWorkout);
 		return (
 			<>
 			<Button variant="outlined" color="primary" onClick={this.showModal}>Configure Workout</Button>
-			<h1>{this.props.selectedWorkout} </h1>
+
+			<h3> {typeof test === 'undefined' ? "Not selected": test.label	  } </h3>
+			<h3> { typeof this.state.selectedDate === 'undefined' ? "Not selected":  this.state.selectedDate.toISOString().slice(0,10) 	  } </h3>
 			<this.ModalWorkoutConfig/>
 
 			</>
