@@ -26,17 +26,11 @@ function App() {
   return (
   <>
   <div className={classes.root}>
-     <Grid container spacing={3}>
-       <Grid item xs={12}>
-         <Paper className={classes.paper}> <h4>Workout</h4> <WorkoutPicker /> </Paper>
-       </Grid>
-       <Grid item xs={6}>
-         <Paper className={classes.paper}> <TimerComponent /> </Paper>
-       </Grid>
-       <Grid item xs={6}>
-         <Paper className={classes.paper}> <MaxOutComponent /> </Paper>
-       </Grid>
-
+     <Grid container spacing={3} className={classes.paper}>
+       <Grid item xs={12}>                     </Grid>
+       <Grid item xs={12}> <WorkoutPicker />   </Grid>
+       <Grid item xs={6}>  <TimerComponent />  </Grid>
+       <Grid item xs={6}>  <MaxOutComponent /> </Grid>
      </Grid>
     </div>
   </>

@@ -35,40 +35,39 @@ export class TimerComponent extends Component {
     return (
       <Timer
         formatValue={value => `${value < 10 ? `0${value}` : value}`}
-        initialTime={123400}
+        initialTime={0}
         startImmediately={false}
         onStart={() => this.setStartTime()}
+        timeToUpdate={100}
       >
-          {({ start, resume, pause, stop, reset, timerState, getTime }) => (
-              <React.Fragment>
-                  <div>
-                      <Timer.Hours/>:
-                      <Timer.Minutes/>:
-                      <Timer.Seconds/>
-                  </div>
-                  <br />
-                  <div>
-                    <Button variant="outlined" color="primary" onClick={start}> Start </Button> <br /><br />
-                    <Button variant="outlined" color="primary" onClick={stop}> Stop </Button> <br /><br />
-                    <Button
-                      size="large"
-                      variant="contained"
-                      color="primary"
-                      onClick={() => this.setMaxOutElapsed( getTime() )}>
-                        Max Out!
-                    </Button >
+        {({ start, resume, pause, stop, reset, timerState, getTime }) => (
+          <React.Fragment>
+            <div>
+              <h1> <Timer.Minutes/>:<Timer.Seconds/> </h1>
+            </div>
+            <br />
+            <div>
+              <Button variant="outlined" color="primary" onClick={start}> Start </Button> &nbsp;&nbsp;&nbsp;
+              <Button variant="outlined" color="primary" onClick={stop}> Stop </Button> &nbsp;&nbsp;&nbsp;
+              <br /><br />
+              <Button
+                size="large"
+                variant="contained"
+                color="primary"
+                onClick={() => this.setMaxOutElapsed( getTime() )}>
+                  Max Out!
+              </Button >
 
-                     <br /><br />
+               <br /><br />
 
-
-                    <button onClick={pause}>Pause</button>
-                    <button onClick={resume}>Resume</button>
-                    <button onClick={reset}>Reset</button>
+              <Button variant="outlined" color="primary" size="small" onClick={pause}>  Pause  </Button> &nbsp;&nbsp;&nbsp;
+              <Button variant="outlined" color="primary" size="small" onClick={resume}> Resume </Button> &nbsp;&nbsp;&nbsp;
+              <Button variant="outlined" color="primary" size="small" onClick={reset}>  Reset  </Button> &nbsp;&nbsp;&nbsp;
 
 
-                  </div>
-              </React.Fragment>
-          )}
+            </div>
+          </React.Fragment>
+        )}
       </Timer>
 
     );

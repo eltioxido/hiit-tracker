@@ -6,8 +6,10 @@ import 'primereact/resources/themes/nova-light/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import { connect } from "react-redux";
-import { setWorkoutConfiguration } from "../actions/index";
+import { setWorkoutConfiguration, saveWorkout } from "../actions/index";
 import Modal from "react-bootstrap/Modal";
+import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
 
 
 
@@ -31,6 +33,8 @@ export class ConnectedWorkoutPicker extends Component {
 		};
 
 		this.setWorkout = this.setWorkout.bind(this);
+		this.finishWorkout = this.finishWorkout.bind(this);
+
 	}
 
 	setWorkout(){
@@ -41,6 +45,15 @@ export class ConnectedWorkoutPicker extends Component {
 		this.hideModal()
 	}
 
+	finishWorkout(){
+		this.props.saveWorkout({
+			userId: this.props.userId,
+			maxOutElapsed: this.props.maxOutElapsed,
+			selectedDate: this.props.selectedDate,
+			selectedWorkout: this.props.selectedWorkout
+		});
+	}
+
 	showModal = () => {
 		this.setState({ isOpen: true });
   };
@@ -49,37 +62,78 @@ export class ConnectedWorkoutPicker extends Component {
 		this.setState({ isOpen: false });
   };
 
+	useStyles = makeStyles((theme) => ({
+	  root: {
+	    flexGrow: 1,
+	  },
+	  paper: {
+	    padding: theme.spacing(2),
+	    textAlign: 'center',
+	    color: theme.palette.text.secondary,
+	  },
+	}));
+
+	ModalWorkoutConfig = () => {
+		const classes = this.useStyles;
+
+	  return (
+	  <>
+			<Modal show={this.state.isOpen} onHide={this.hideModal}>
+				<Modal.Header>Workout configuration</Modal.Header>
+				<Modal.Body>
+					<div className={classes.root}>
+						<Grid container spacing={3} direction="column" alignItems="center" justify="center">
+							<Grid item xs={12}>
+								<h5 class="d-inline-block"> Workout: </h5> &nbsp;&nbsp;&nbsp;
+								<Dropdown
+									style={{ width: 220 }}
+									value={this.state.selectedWorkout}
+									options={this.state.max30ItemsMonth1}
+									onChange={e => {
+										this.setState({ selectedWorkout: e.target.value });
+									}}
+									placeholder='Select a Max 30 Workout'
+								/>
+							</Grid>
+							<Grid item xs={12}>
+								<h5 class="d-inline-block"> Date: </h5	> &nbsp;&nbsp;&nbsp;
+								<Calendar
+									value={new Date()}
+									showButtonBar={true}
+									onChange={e => {
+										this.setState({ selectedDate: e.target.value });
+									}}
+								/>
+							</Grid>
+						</Grid>
+					</div>
+				</Modal.Body>
+				<Modal.Footer>
+					<Button variant="outlined" color="secondary" onClick={this.hideModal}>Cancel</Button>
+					&nbsp;&nbsp;&nbsp;
+					<Button variant="outlined" color="primary" onClick={this.setWorkout}> Save </Button>
+				</Modal.Footer>
+			</Modal>
+
+			<br/><br/>
+			<Button
+				size="large"
+				variant="contained"
+				color="primary"
+				onClick={this.finishWorkout}>
+					Save!
+			</Button >
+
+	  </>
+	);
+	}
+
 	render() {
 		return (
 			<>
-			<button onClick={this.showModal}>Display Modal</button>
+			<Button variant="outlined" color="primary" onClick={this.showModal}>Configure Workout</Button>
 			<h1>{this.props.selectedWorkout} </h1>
-			<Modal show={this.state.isOpen} onHide={this.hideModal}>
-					<Modal.Header>Hi</Modal.Header>
-					<Modal.Body>
-						<Dropdown
-							style={{ width: 220 }}
-							value={this.state.max30Workout}
-							options={this.state.max30ItemsMonth1}
-							onChange={e => {
-								this.setState({ selectedWorkout: e.target.value });
-							}}
-							placeholder='Select a Max 30 Workout'
-						/>
-						<br /><br />
-						<Calendar
-							showIcon={true}
-							onChange={e => {
-								this.setState({ selectedDate: e.target.value });
-							}}
-						 />
-						<br /><br />
-					</Modal.Body>
-					<Modal.Footer>
-						<Button variant="outlined" color="primary" onClick={this.hideModal}>Cancel</Button>
-						<Button variant="outlined" color="primary" onClick={this.setWorkout}> Save </Button>
-					</Modal.Footer>
-				</Modal>
+			<this.ModalWorkoutConfig/>
 
 			</>
 		);
@@ -88,15 +142,18 @@ export class ConnectedWorkoutPicker extends Component {
 
 const mapStateToProps = state => {
   return {
+		userId: state.userId,
 		selectedDate: state.selectedDate,
 		selectedWorkout: state.selectedWorkout,
 		workoutConfigSet: state.workoutConfigSet,
+		maxOutElapsed: state.maxOutElapsed,
   };
 };
 
 function mapDispatchToProps(dispatch) {
   return {
     setWorkoutConfiguration: workout => dispatch(setWorkoutConfiguration(workout)),
+    saveWorkout: dataWorkout => dispatch(saveWorkout(dataWorkout)),
   };
 }
 

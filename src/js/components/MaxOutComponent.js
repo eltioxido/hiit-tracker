@@ -21,7 +21,8 @@ const mapStateToProps = state => {
 const ConnectedMaxOut = ({ maxOutTime }) => (
   <div>
     <div>
-      <h2> Maxed Out at </h2> <h1> <b>{convertHMS(maxOutTime)}</b> </h1>
+      <h2> Maxed Out at </h2>
+      <h1> <b> {maxOutTime !== undefined ? convertHMS(maxOutTime) : ""} </b> </h1>
     </div>
   </div>
 );

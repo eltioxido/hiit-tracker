@@ -1,5 +1,5 @@
 import { ADD_ARTICLE, DATA_REQUESTED } from "../constants/action-types";
-import { TIME_STARTED, TIME_MAXOUT_SET, WORKOUT_CONFIGURATION_SET } from "../constants/action-types";
+import { TIME_STARTED, TIME_MAXOUT_SET, WORKOUT_CONFIGURATION_SET, WORKOUT_SAVE } from "../constants/action-types";
 
 export function addArticle(payload) {
   return { type: ADD_ARTICLE, payload };
@@ -18,4 +18,7 @@ export function setMaxOutElapsed(payload) {
 }
 export function setWorkoutConfiguration(payload) {
   return { type: WORKOUT_CONFIGURATION_SET, payload };
+}
+export function saveWorkout(payload) {
+  return { type: WORKOUT_SAVE, payload };
 }

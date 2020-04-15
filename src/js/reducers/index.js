@@ -19,6 +19,7 @@ const initialState = {
   workout:'',
   startTime: undefined,
   maxOutElapsed: undefined,
+  userId:1234,
 };
 
 function rootReducer(state = initialState, action) {
@@ -42,7 +43,8 @@ function rootReducer(state = initialState, action) {
 
   if (action.type === TIME_STARTED) {
     return Object.assign({}, state, {
-        startTime: action.payload
+        startTime: action.payload,
+        workOutStarted:true
     });
   }
   if (action.type === TIME_MAXOUT_SET) {
