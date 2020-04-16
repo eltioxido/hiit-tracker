@@ -3,7 +3,8 @@ import { ADD_ARTICLE, DATA_LOADED, API_ERRORED } from "../constants/action-types
 import {
   TIME_STARTED,
   TIME_MAXOUT_SET,
-  WORKOUT_CONFIGURATION_SET
+  WORKOUT_CONFIGURATION_SET,
+  USER_SET
 } from "../constants/action-types";
 
 const initialState = {
@@ -19,7 +20,8 @@ const initialState = {
   workout:'',
   startTime: undefined,
   maxOutElapsed: undefined,
-  userId:1234,
+  userId:undefined,
+  user: undefined,
 };
 
 function rootReducer(state = initialState, action) {
@@ -57,6 +59,11 @@ function rootReducer(state = initialState, action) {
       selectedWorkout: action.payload.selectedWorkout,
       selectedDate: action.payload.selectedDate,
       workoutConfigSet: true,
+    });
+  }
+  if (action.type === USER_SET) {
+    return Object.assign({}, state, {
+        user: action.payload
     });
   }
 
