@@ -48,7 +48,7 @@ export class ConnectedWorkoutPicker extends Component {
 
 	finishWorkout(){
 		this.props.saveWorkout({
-			userId: this.props.userId,
+			userId: this.props.user.sub,
 			maxOutElapsed: this.props.maxOutElapsed,
 			selectedDate: this.props.selectedDate,
 			selectedWorkout: this.props.selectedWorkout
@@ -149,7 +149,7 @@ export class ConnectedWorkoutPicker extends Component {
 
 const mapStateToProps = state => {
   return {
-		userId: state.userId,
+		user: state.user,
 		selectedDate: state.selectedDate,
 		selectedWorkout: state.selectedWorkout,
 		workoutConfigSet: state.workoutConfigSet,
