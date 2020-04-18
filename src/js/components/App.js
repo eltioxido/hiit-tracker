@@ -11,6 +11,7 @@ import Grid from '@material-ui/core/Grid';
 
 import NavBar from "./NavBar";
 import Profile from "./Profile";
+import BottomNavigationComponent from "./BottomNavigation";
 import history from "../utils/history";
 import { useAuth0 } from "../react-auth0-spa";
 import PrivateRoute from "./PrivateRoute";
@@ -47,22 +48,25 @@ function App() {
   return (
   <>
   <div className={classes.root}>
-    <Router history={history}>
-      <header>
-        <NavBar />
-      </header>
-      <Switch>
-        <Route path="/" exact />
-        <PrivateRoute path="/profile" component={Profile} />
-      </Switch>
-    </Router>
-     <Grid container spacing={3} className={classes.paper}>
+     <Grid container className={classes.paper}>
        <Grid item xs={12}>                     </Grid>
        <Grid item xs={12}> <WorkoutPicker />   </Grid>
-       <Grid item xs={6}>  <TimerComponent />  </Grid>
-       <Grid item xs={6}>  <MaxOutComponent /> </Grid>
+       <Grid item xs={12}>  <TimerComponent />  </Grid>
+       <Grid item xs={12}>  <MaxOutComponent /> </Grid>
+       <Grid item xs={12}>  <MaxOutComponent /> </Grid>
+       <Grid item xs={12}>  <MaxOutComponent /> </Grid>
+       <Grid item xs={12}>  <MaxOutComponent /> </Grid>
+       <Grid item xs={12}>  <MaxOutComponent /> </Grid>
+       <Grid item xs={12}>  <MaxOutComponent /> </Grid>
+       <Grid item xs={12}>  <MaxOutComponent /> </Grid>
+       <Grid item xs={12}>  <MaxOutComponent /> </Grid>
+       <Grid item xs={12}>  <MaxOutComponent /> </Grid>
+       <Grid item xs={12}>  <MaxOutComponent /> </Grid>
+       <Grid item xs={12}>  <MaxOutComponent /> </Grid>
+       <BottomNavigationComponent />
      </Grid>
     </div>
+
   </>
 );
 }

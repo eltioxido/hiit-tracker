@@ -31,7 +31,7 @@ function getData(payload) {
      let headers2 = new Headers();
      headers2.append('Content-Type', 'application/x-www-form-urlencoded');
 
-  var request = new Request("http://192.168.1.77:3001/", {
+  var request = new Request("https://vast-temple-83831.herokuapp.com/", {
     method: 'POST',
     body:  JSON.stringify(payload),
     headers:{ 'Content-Type': 'application/json' }
