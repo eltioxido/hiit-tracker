@@ -18,10 +18,16 @@ export class TimerComponent extends Component {
       timerStart: 0,
       timerTime: 0
     };
+    this.startTimer = this.startTimer.bind(this);
   }
 
-  startTimer = () => {
+  componentDidMount() {
+    if (this.props.workoutConfigSet) {
+      this.startTimer()
+    }
+  }
 
+  startTimer () {
     const lDate = Date.now()
     this.setState({ startTime: lDate });
     this.props.setStartTime(lDate);
@@ -36,7 +42,7 @@ export class TimerComponent extends Component {
         timerTime: Date.now() - this.state.timerStart
       });
     }, 10);
-  };
+  }
 
   stopTimer = () => {
     this.setState({ timerOn: false });
@@ -65,12 +71,13 @@ export class TimerComponent extends Component {
 
   render() {
 
+    //if(this.props.workoutConfigSet) { this.startTimer() }
 
-          const { timerTime } = this.state;
-          let centiseconds = ("0" + (Math.floor(timerTime / 10) % 100)).slice(-2);
-          let seconds = ("0" + (Math.floor(timerTime / 1000) % 60)).slice(-2);
-          let minutes = ("0" + (Math.floor(timerTime / 60000) % 60)).slice(-2);
-          let hours = ("0" + Math.floor(timerTime / 3600000)).slice(-2);
+    const { timerTime } = this.state;
+    let centiseconds = ("0" + (Math.floor(timerTime / 10) % 100)).slice(-2);
+    let seconds = ("0" + (Math.floor(timerTime / 1000) % 60)).slice(-2);
+    let minutes = ("0" + (Math.floor(timerTime / 60000) % 60)).slice(-2);
+    let hours = ("0" + Math.floor(timerTime / 3600000)).slice(-2);
 
 
     return (
@@ -78,18 +85,19 @@ export class TimerComponent extends Component {
 
         <React.Fragment>
           <div>
+          <br /><br />
+
+          { true ? null:
+            <Button disabled={!(this.state.timerOn === false && this.state.timerTime === 0)} variant="outlined" color="primary" onClick={() => this.startTimer()}> Start </Button>
+          }
+          <br /><br />
             <h1> {minutes}:{seconds} </h1>
           </div>
 
 
-
-
-           <br />
-
-
           <div>
 
-              <Button disabled={!(this.state.timerOn === false && this.state.timerTime === 0)} variant="outlined" color="primary" onClick={this.startTimer}> Start </Button>
+
               <br /><br />
               <Button
                 disabled={!(this.state.timerOn === true)}
@@ -100,8 +108,7 @@ export class TimerComponent extends Component {
                   Max Out!
               </Button >
               <br /><br />
-              <Button disabled={!(this.state.timerOn === true)} variant="outlined" color="primary" onClick={this.stopTimer}> Stop </Button>
-              <br /><br />
+              <Button disabled={!(this.state.timerOn === true)} variant="outlined" color="primary" size="small"  onClick={this.stopTimer}> Pause </Button> &nbsp;&nbsp;&nbsp;
               <Button disabled={!(this.state.timerOn === false && this.state.timerTime > 0)} variant="outlined" color="primary" size="small" onClick={this.startTimer}> Resume </Button> &nbsp;&nbsp;&nbsp;
               <Button disabled={!(this.state.timerOn === false && this.state.timerTime > 0)} variant="outlined" color="primary" size="small" onClick={this.resetTimer}>  Reset  </Button> &nbsp;&nbsp;&nbsp;
 
@@ -118,6 +125,12 @@ export class TimerComponent extends Component {
   }
 }
 
+function mapStateToProps (state) {
+  return {
+		workoutConfigSet: state.workoutConfigSet
+  };
+};
+
 function mapDispatchToProps(dispatch) {
   return {
     setStartTime: startTime => dispatch(setStartTime(startTime)),
@@ -126,6 +139,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(TimerComponent);

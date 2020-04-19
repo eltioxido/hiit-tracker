@@ -9,7 +9,7 @@ export default function* watcherSaga() {
 function* workerSaga(action) {
   try {
     const payload = yield call(getData, action.payload);
-    yield put({ type: DATA_LOADED, payload });
+    yield put({ type: DATA_LOADED, payload});
   } catch (e) {
     yield put({ type: API_ERRORED, payload: e });
   }
@@ -25,9 +25,6 @@ function* workOutSaveSaga(action) {
 }
 
 function getData(payload) {
-  let data = {
-      name: 'Sara'
-  }
      let headers2 = new Headers();
      headers2.append('Content-Type', 'application/x-www-form-urlencoded');
 
@@ -37,7 +34,5 @@ function getData(payload) {
     headers:{ 'Content-Type': 'application/json' }
 });
 
-
-    console.log(JSON.stringify(payload))
   return fetch(request).then( response => response.json() );
 }

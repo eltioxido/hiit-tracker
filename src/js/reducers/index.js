@@ -22,6 +22,9 @@ const initialState = {
   maxOutElapsed: undefined,
   userId:undefined,
   user: undefined,
+
+  insertedWorkout: false,
+  message: undefined
 };
 
 function rootReducer(state = initialState, action) {
@@ -33,7 +36,8 @@ function rootReducer(state = initialState, action) {
 
   if (action.type === DATA_LOADED) {
     return Object.assign({}, state, {
-      remoteArticles: state.remoteArticles.concat(action.payload)
+      insertedWorkout: true,
+      message: action.payload.message
     });
   }
 
