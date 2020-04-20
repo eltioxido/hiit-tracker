@@ -13,25 +13,18 @@ export class ConnectedMaxOut extends Component {
 
 		this.finishWorkout = this.finishWorkout.bind(this);
 
+
 	}
 
   finishWorkout(){
     this.props.saveWorkout({
       userId: this.props.user.sub,
+      email: this.props.user.email,
       maxOutElapsed: this.props.maxOutElapsed,
       selectedDate: this.props.selectedDate,
       selectedWorkout: this.props.selectedWorkout
     });
   }
-
-  finishWorkout(){
-		this.props.saveWorkout({
-			userId: this.props.user.sub,
-			maxOutElapsed: this.props.maxOutElapsed,
-			selectedDate: this.props.selectedDate,
-			selectedWorkout: this.props.selectedWorkout
-		});
-	}
 
   convertHMS (value) {
       let sec = parseInt(value) / 1000;
@@ -86,7 +79,8 @@ const mapStateToProps = state => {
 		maxOutElapsed: state.maxOutElapsed,
     maxOutTime: state.maxOutElapsed,
     message: state.message,
-    insertedWorkout: state.insertedWorkout
+    insertedWorkout: state.insertedWorkout,
+    token: state.token,
   };
 };
 

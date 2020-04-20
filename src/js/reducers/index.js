@@ -4,13 +4,18 @@ import {
   TIME_STARTED,
   TIME_MAXOUT_SET,
   WORKOUT_CONFIGURATION_SET,
-  USER_SET
+  USER_SET,
+  WORKOUTS_LOADED,
+  HOME_SET,
+  TOKEN_SET
 } from "../constants/action-types";
 
 const initialState = {
   articles: [],
   remoteArticles: [],
   error: '',
+
+  workouts: [],
 
   selectedWorkout: undefined,
   selectedDate: undefined,
@@ -24,7 +29,10 @@ const initialState = {
   user: undefined,
 
   insertedWorkout: false,
-  message: undefined
+  message: undefined,
+
+  onHomePage: true,
+  token: undefined,
 };
 
 function rootReducer(state = initialState, action) {
@@ -37,7 +45,13 @@ function rootReducer(state = initialState, action) {
   if (action.type === DATA_LOADED) {
     return Object.assign({}, state, {
       insertedWorkout: true,
+      onHomePage: true,
       message: action.payload.message
+    });
+  }
+  if (action.type === WORKOUTS_LOADED) {
+    return Object.assign({}, state, {
+      workouts: action.payload
     });
   }
 
@@ -68,6 +82,17 @@ function rootReducer(state = initialState, action) {
   if (action.type === USER_SET) {
     return Object.assign({}, state, {
         user: action.payload
+    });
+  }
+  if (action.type === HOME_SET) {
+    return Object.assign({}, state, {
+        onHomePage: action.payload
+    });
+  }
+  if (action.type === TOKEN_SET) {
+    console.log(action.payload)
+    return Object.assign({}, state, {
+        token: action.payload
     });
   }
 
