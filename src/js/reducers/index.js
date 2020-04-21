@@ -90,7 +90,6 @@ function rootReducer(state = initialState, action) {
     });
   }
   if (action.type === TOKEN_SET) {
-    console.log(action.payload)
     return Object.assign({}, state, {
         token: action.payload
     });

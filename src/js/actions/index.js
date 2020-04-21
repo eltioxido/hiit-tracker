@@ -33,6 +33,5 @@ export function setHome(payload) {
   return { type: HOME_SET, payload };
 }
 export function setToken(payload) {
-  console.log(payload)
   return { type: TOKEN_SET, payload };
 }

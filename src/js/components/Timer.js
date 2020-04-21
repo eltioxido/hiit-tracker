@@ -20,12 +20,16 @@ export class TimerComponent extends Component {
     };
     this.startTimer = this.startTimer.bind(this);
   }
+  componentWillUnmount() {
+    //this.startTimer.unbind(this);
+  }
 
   componentDidMount() {
     if (this.props.workoutConfigSet) {
       this.startTimer()
     }
   }
+
 
   startTimer () {
     const lDate = Date.now()

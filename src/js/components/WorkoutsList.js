@@ -54,6 +54,8 @@ export class ListComponent extends Component {
 
     return (
       <>
+
+        <br/><br/><br/>
         <Button
           size="large"
           variant="contained"
@@ -61,7 +63,7 @@ export class ListComponent extends Component {
           onClick={this.handleClick.bind(this)}>
             I want to MaxOut!
         </Button >
-
+        <br/><br/><br/>
 
         <TableContainer>
           <Table className={classes.table} aria-label="customized table">

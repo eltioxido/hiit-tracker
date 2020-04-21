@@ -1,7 +1,7 @@
 import { takeEvery, call, put } from "redux-saga/effects";
 import { DATA_REQUESTED, DATA_LOADED, API_ERRORED, WORKOUT_SAVE, WORKOUTS_REQUESTED, WORKOUTS_LOADED } from "../constants/action-types";
 
-import { useAuth0 } from "../react-auth0-spa";
+import { useAuth0, getTokenSilently } from "../react-auth0-spa";
 
 //const URL = "https://vast-temple-83831.herokuapp.com/"
 const URL = "http://localhost:5000/"
@@ -71,22 +71,23 @@ function* workOutSaveSaga(action) {
 const setData = async (payload) => {
 
   //var request = new Request("https://vast-temple-83831.herokuapp.com/", {
+  const token = await getTokenSilently();
   var request = new Request(URL, {
     method: 'POST',
     body:  JSON.stringify(payload),
-    headers:{ 'Content-Type': 'application/json' }
+    headers:{ 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token }
 });
 
   return fetch(request).then( response => response.json() );
 }
 const getData  = async (payload) => {
-  console.log(payload)
-
+  const token = await getTokenSilently();
   //var request = new Request("https://vast-temple-83831.herokuapp.com/", {
   var request = new Request(URL, {
     method: 'GET',
     body:  JSON.stringify(payload),
-    headers:{ 'Content-Type': 'application/json' }
+    headers:{ 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token }
+    //headers:{ 'Content-Type': 'application/json', 'Authorization': 'Bearer BR22qmKl1E0wgCFmOcauEXwQEQ_3MDb0koa4gEve2VbDQXLlxvPA8weGUNsj2G9_e6PWN8dAaL8Qk57WDcHv1UnICX0VjZhQLbwhHe7Z7AMzSmHG3E_9lmf5T5oJvdxQYiHYUr_BOCkLtiWLS3CS6dZ8mhczwFoNXngPzlyxAVt2lgkFJzB5TTdHf1kfHFFD6o8s4rlk3OjKA88VcBFcH3o7oDGbPlCxlrJxW8NffLhPrjj7iONF_jQy6q_83gRvJk2WOJnJD1iTuEMZ8__xJs8fEw6bpJ8ckehsca0nTGVlOvxFpkAdAv5ypwUgg3F5sqo5dbUsjS0KeD8vhQj3SA' }
 });
 
   return fetch(request).then( response => response.json() );
