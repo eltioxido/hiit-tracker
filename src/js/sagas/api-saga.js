@@ -1,3 +1,4 @@
+import config from "../endpoints.json";
 import { takeEvery, call, put } from "redux-saga/effects";
 import { 
   DATA_REQUESTED, 
@@ -11,8 +12,8 @@ import {
 
 import { useAuth0, getTokenSilently } from "../react-auth0-spa";
 
-//const URL = "https://vast-temple-83831.herokuapp.com/"
-const URL = "http://localhost:5000/"
+const URL = config.workouts;
+//const URL = "http://localhost:5000/"
 //const URL = "http://192.168.1.77:5000/"
 
 
