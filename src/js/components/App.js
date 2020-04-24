@@ -19,6 +19,7 @@ import history from "../utils/history";
 import { useAuth0 } from "../react-auth0-spa";
 import PrivateRoute from "./PrivateRoute";
 import ListComponent from "./WorkoutsList";
+import BestLastComponent from "./BestLast";
 import Button from '@material-ui/core/Button';
 
 import { useDispatch, useSelector } from "react-redux";
@@ -71,6 +72,7 @@ function App() {
            <>
            {!insertedWorkout ?
              <>
+             <Grid item xs={12}>  <BestLastComponent />  </Grid>
              <Grid item xs={12}>  <TimerComponent />  </Grid>
              <Grid item xs={12}>  <MaxOutComponent /> </Grid>
              </>

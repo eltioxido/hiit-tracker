@@ -89,8 +89,7 @@ export class TimerComponent extends Component {
 
         <React.Fragment>
           <div>
-          <br /><br />
-
+          <br />
           { true ? null:
             <Button disabled={!(this.state.timerOn === false && this.state.timerTime === 0)} variant="outlined" color="primary" onClick={() => this.startTimer()}> Start </Button>
           }
