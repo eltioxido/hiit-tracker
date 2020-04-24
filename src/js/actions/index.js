@@ -1,5 +1,14 @@
 import { ADD_ARTICLE, DATA_REQUESTED } from "../constants/action-types";
-import { TIME_STARTED, TIME_MAXOUT_SET, WORKOUT_CONFIGURATION_SET, WORKOUT_SAVE, USER_SET, WORKOUTS_REQUESTED, HOME_SET, TOKEN_SET } from "../constants/action-types";
+import { 
+  TIME_STARTED, 
+  TIME_MAXOUT_SET, 
+  WORKOUT_CONFIGURATION_SET, 
+  WORKOUT_SAVE, 
+  USER_SET, 
+  WORKOUTS_REQUESTED, 
+  HOME_SET, 
+  TOKEN_SET,
+  BEST_WORKOUT_REQUESTED } from "../constants/action-types";
 
 export function addArticle(payload) {
   return { type: ADD_ARTICLE, payload };
@@ -11,6 +20,9 @@ export function getData(url) {
 
 export function getWorkouts(payload) {
   return { type: WORKOUTS_REQUESTED, payload };
+}
+export function getBestLastWorkout(payload) {
+  return { type: BEST_WORKOUT_REQUESTED, payload };
 }
 
 

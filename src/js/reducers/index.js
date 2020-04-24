@@ -1,4 +1,4 @@
-import { ADD_ARTICLE, DATA_LOADED, API_ERRORED } from "../constants/action-types";
+import { ADD_ARTICLE, DATA_LOADED, API_ERRORED, BEST_WORKOUT_LOADED } from "../constants/action-types";
 
 import {
   TIME_STARTED,
@@ -33,6 +33,7 @@ const initialState = {
 
   onHomePage: true,
   token: undefined,
+  bestWorkout: undefined
 };
 
 function rootReducer(state = initialState, action) {
@@ -52,6 +53,11 @@ function rootReducer(state = initialState, action) {
   if (action.type === WORKOUTS_LOADED) {
     return Object.assign({}, state, {
       workouts: action.payload
+    });
+  }
+  if (action.type === BEST_WORKOUT_LOADED) {
+    return Object.assign({}, state, {
+      bestWorkout: action.payload.length ? action.payload[0]: undefined
     });
   }
 
