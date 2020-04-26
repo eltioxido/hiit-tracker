@@ -48,13 +48,12 @@ export class ConnectedMaxOut extends Component {
               <>
                 <h2> Maxed Out at </h2>
                 <h1> <b>  {this.convertHMS(this.props.maxOutTime)} </b> </h1>
-                <br/><br/>
                 <Button
           				size="large"
-          				variant="contained"
-          				color="primary"
+                  variant="outlined"
+                  color="primary"
           				onClick={this.finishWorkout}>
-          					Save!
+          					Save
           			</Button >
               </> :
               null
@@ -62,6 +61,7 @@ export class ConnectedMaxOut extends Component {
             { this.props.insertedWorkout ?
               <h2> {this.props.message} </h2> : null
             }
+            <br/><br/><br/>
           </div>
         </div>
       </>

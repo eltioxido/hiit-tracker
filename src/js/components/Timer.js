@@ -89,12 +89,8 @@ export class TimerComponent extends Component {
 
         <React.Fragment>
           <div>
-          <br />
-          { true ? null:
-            <Button disabled={!(this.state.timerOn === false && this.state.timerTime === 0)} variant="outlined" color="primary" onClick={() => this.startTimer()}> Start </Button>
-          }
-          <br /><br />
-            <h1> {minutes}:{seconds} </h1>
+          { true ? null: null}
+          <h1 style={{fontSize: '7rem'}}> {minutes}:{seconds} </h1>
           </div>
 
 
@@ -103,17 +99,23 @@ export class TimerComponent extends Component {
 
               <br /><br />
               <Button
+                style={{width: '180px', height: '63px'}}
                 disabled={!(this.state.timerOn === true)}
                 size="large"
                 variant="contained"
                 color="primary"
                 onClick={() => this.setMaxOutElapsed()}>
-                  Max Out!
+                  <span style={{fontSize: '1.5rem'}}>Max Out!</span>
               </Button >
               <br /><br />
-              <Button disabled={!(this.state.timerOn === true)} variant="outlined" color="primary" size="small"  onClick={this.stopTimer}> Pause </Button> &nbsp;&nbsp;&nbsp;
-              <Button disabled={!(this.state.timerOn === false && this.state.timerTime > 0)} variant="outlined" color="primary" size="small" onClick={this.startTimer}> Resume </Button> &nbsp;&nbsp;&nbsp;
-              <Button disabled={!(this.state.timerOn === false && this.state.timerTime > 0)} variant="outlined" color="primary" size="small" onClick={this.resetTimer}>  Reset  </Button> &nbsp;&nbsp;&nbsp;
+              { this.state.timerOn === false ?
+                <>
+                <Button disabled={!(this.state.timerOn === false && this.state.timerTime === 0)} variant="outlined" onClick={() => this.startTimer()}> Start </Button> &nbsp;&nbsp;
+                </> : null
+              }
+              <Button disabled={!(this.state.timerOn === true)} variant="outlined" size="small"  onClick={this.stopTimer}> Pause </Button> &nbsp;&nbsp;
+              <Button disabled={!(this.state.timerOn === false && this.state.timerTime > 0)} variant="outlined" size="small" onClick={this.startTimer}> Resume </Button> &nbsp;&nbsp;
+              <Button disabled={!(this.state.timerOn === false && this.state.timerTime > 0)} variant="outlined" size="small" onClick={this.resetTimer}>  Reset  </Button> &nbsp;&nbsp;
 
           </div>
         </React.Fragment>
