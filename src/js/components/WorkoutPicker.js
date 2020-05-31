@@ -24,7 +24,12 @@ export class ConnectedWorkoutPicker extends Component {
 				{ label: 'Sweat Intervals', value: 'sweat-intervals-1' },
 				{ label: 'Friday Fight: Round 1', value: 'friday-fight-1' },
 				{ label: 'Tabata Strength', value: 'tabata-strength-1' },
-				{ label: 'Pulse', value: 'pulse-1' }
+				{ label: 'Pulse', value: 'pulse-1' },
+				{ label: 'Max Out Cardio', value: 'max-out-2' },
+				{ label: 'Max Out Power', value: 'max-power-2' },
+				{ label: 'Max Out Sweat', value: 'max-sweat-2' },
+				{ label: 'Max Out Strenght', value: 'max-strenght-2' },
+				{ label: 'Friday Fight: Round 2', value: 'friday-fight-2' }
 			],
 			selectedDate: undefined,
 			selectedWorkout: undefined,
