@@ -36,6 +36,11 @@ h['sweat-intervals-1'] = 'Sweat Intervals';
 h['friday-fight-1'] = 'Friday Fight: Round 1';
 h['tabata-strength-1'] = 'Tabata Strength';
 h['pulse-1'] = 'Pulse';
+h['max-out-2'] = 'Max Out Cardio';
+h['max-power-2'] = 'Max Out Power';
+h['max-sweat-2'] = 'Max Out Sweat';
+h['max-strenght-2'] = 'Max Out Strenght';
+h['friday-fight-2'] = 'Friday Fight: Round 2';
 
 export default function* watcherSaga() {
   yield takeEvery(DATA_REQUESTED, workerSaga);

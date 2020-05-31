@@ -2,7 +2,7 @@ import React from "react";
 import { Router, Route, Switch } from "react-router-dom";
 import TimerComponent from "./Timer";
 import MaxOutComponent from "./MaxOutComponent";
-import WorkoutPicker from "./WorkoutPicker";
+import WorkoutPicker from "./WorkoutPicker"; 
 import HorizontalLabelPositionBelowStepper from "./StepsMain";
 import 'react-calendar/dist/Calendar.css';
 import WakeLock from 'react-wakelock-react16';
